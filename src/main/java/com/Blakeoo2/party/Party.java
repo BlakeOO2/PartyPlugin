@@ -15,7 +15,7 @@ public class Party {
         members.add(leader);
     }
 
-    //TODO /remover/kick/promote
+
 
     public Set<UUID> getInvited() {
         return invited;
