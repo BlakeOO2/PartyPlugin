@@ -1,7 +1,28 @@
-Name: PartyPlugin
+name: PartyPlugin
 main: com.Blakeoo2.Main
 version: '${project.version}'
 api-version: 1.21
 authors:
   - Blakeoo2
 Description: Party plugin manager
+
+
+commands:
+  party:
+    description: Base party command
+    usage: /party <create/invite/accept/disband/leave/chat>
+    aliases:
+      - p
+
+  partychat:
+    description: Command shortcut for /party chat
+    usage: /partychat (message)
+    aliases:
+      - pc
+      - pchat
+      - partyc
+
+permissions:
+  PartyPlugin.bypass.maxSize:
+    default: op
+    description: Allows the user to join a party when it is full

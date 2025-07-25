@@ -1,0 +1,19 @@
+
+ Provide commands to  /party invite, /accept, /leave, /kick, /promote, etc.
+
+Party Chat: A dedicated chat channel for party members, as well as a toggle (all chat vs. party chat), so teams can strategize privately.
+Shared XP & Loot: Configure how experience and loot are shared. Options: EXP auto share, EXP free for all. And a loot distribution system
+Options: Loot Auto Share, Loot free for all. These options can be removed later and the player won't be able to choose between them, but we will need to test them in game first to see what works best.
+
+Teleports: There is going to be a custom item named reverse scroll, that can teleport you to specific places, these places include
+the locations of another member in your party.
+
+Group Buffs (optional): Possibly grant small buffs to all party members (e.g. slight XP boost or detection of teammates). This is optional.
+
+Extensible: The party system should fire events or have an API so quests/dungeons can recognize party groups. Mobs should recognize a part,
+ where the spawn rate would increase or maybe even summon certain mobs, to balance the party system.
+
+
+
+DONE:
+Group Formation: Players can form parties of a limited size (configurable, e.g. up to 4–6 members).
