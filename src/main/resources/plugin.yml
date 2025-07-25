@@ -1,0 +1,7 @@
+Name: PartyPlugin
+main: com.Blakeoo2.Main
+version: '${project.version}'
+api-version: 1.21
+authors:
+  - Blakeoo2
+Description: Party plugin manager
