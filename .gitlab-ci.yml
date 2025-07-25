@@ -47,14 +47,16 @@ release:
   script:
     - VERSION=$(cat version.txt)
     - JAR_FILE=$(ls target/*.jar | head -n 1)
-    - curl --request POST \
-        --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-        --form "name=Release v$VERSION" \
-        --form "tag_name=v$VERSION" \
-        --form "description=Automated release for version $VERSION" \
-        --form "assets[links][][name]=Download Jar" \
-        --form "assets[links][][url]=$CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/file/$JAR_FILE" \
-        "$CI_API_V4_URL/projects/$CI_PROJECT_ID/releases"
+    - >
+      curl --request POST
+      --header "PRIVATE-TOKEN: $GITLAB_TOKEN"
+      --form "name=Release v$VERSION"
+      --form "tag_name=v$VERSION"
+      --form "description=Automated release for version $VERSION"
+      --form "assets[links][][name]=Download Jar"
+      --form "assets[links][][url]=$CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/file/$JAR_FILE"
+      "$CI_API_V4_URL/projects/$CI_PROJECT_ID/releases"
   only:
     - main
+
 
