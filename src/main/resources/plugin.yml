@@ -33,7 +33,12 @@ permissions:
     description: Base permission for admin party command
     children:
       - PartyPlugin.admin.reload
+      - PartyPlugin.admin.socialspy
 
   PartyPlugin.admin.reload:
     default: op
     description: Allows the admin to reload all config files.
+
+  PartyPlugin.admin.socialspy:
+    default: op
+    description: Allows the user to see all party chat messages, doesn't matter what party they are in themselves

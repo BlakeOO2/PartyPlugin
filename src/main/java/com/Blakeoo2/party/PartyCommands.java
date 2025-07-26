@@ -56,6 +56,7 @@ public class PartyCommands implements CommandExecutor {
                     plugin.getPartyManager().createParty(player.getUniqueId());
                     break;
                 case "invite":
+                case "i":
                     if (args.length < 2) { // Check if args[1] exists
                         player.sendMessage(plugin.getLanguageManager().getMessage("party.usage.invite"));
                         break;
@@ -72,6 +73,7 @@ public class PartyCommands implements CommandExecutor {
                     plugin.getPartyManager().leaveParty(player.getUniqueId());
                     break;
                 case "list":
+                case "l":
                     Party party = plugin.getPartyManager().getParty(player.getUniqueId());
 
                     if (party == null) {
@@ -127,6 +129,8 @@ public class PartyCommands implements CommandExecutor {
                     plugin.getPartyManager().kickMemeber(player.getUniqueId(), kickTarget.getUniqueId());
                     break;
                 case "accept":
+                case "a":
+                    //TODO make it so if they just run /party accept it will accept the last party invite they received
                     if (args.length < 2) { // Validate args[1] exists
                         player.sendMessage(plugin.getLanguageManager().getMessage("party.usage.accept"));
                         break;
@@ -157,8 +161,6 @@ public class PartyCommands implements CommandExecutor {
                             break;
 
                         }
-
-
                         // Debugging args
                         for (int i = 0; i < args.length; i++) {
                             plugin.debug("Party executed with arg " + i + ": " + args[i]);
@@ -170,20 +172,27 @@ public class PartyCommands implements CommandExecutor {
                             break;
                         }
 
-
                         switch (args[1].toLowerCase()) {
                             case "help":
                                 showAdminHelp(player);
                                 break;
                             case "reload":
-                                reloadPlugin();
-                                player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.reload"));
+                                if (player.hasPermission("PartyPlugin.admin.reload")) {
+                                    reloadPlugin();
+                                    player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.reload"));
+                                    break;
+                                }
+                                player.sendMessage(plugin.getLanguageManager().getMessage("no_permission"));
                                 break;
                             case "socialspy":
-                                //TODO create an admin command to allow peoples with a specific permission node to turn on party chat spy
-                                //TODO need to create en_us message
-                                //TODO create function
-                                break;
+                            case "ss":
+                                if(player.hasPermission("PartyPlugin.admin.socialspy")){
+                                    plugin.getPartyManager().toggleSocialSpy(player.getUniqueId());
+                                    break;
+                                }
+                                    player.sendMessage(plugin.getLanguageManager().getMessage("no_permission"));
+                                    break;
+                            //TODO admin command to see who is in whos party
                             default:
                                 showAdminHelp(player);
                                 break;
@@ -224,8 +233,17 @@ public class PartyCommands implements CommandExecutor {
     }
 
     private void showAdminHelp(Player player) {
-        player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.help"));
-        player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.reload"));
+        if (player.hasPermission("PartyPlugin.admin")) {
+            player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.help"));
+            if (player.hasPermission("PartyPlugin.admin.reload")) {
+                player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.reload"));
+            }
+            if (player.hasPermission("PartyPlugin.admin.socialspy")) {
+                player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.socialspy"));
+            }
+        } else {
+            player.sendMessage(plugin.getLanguageManager().getMessage("no_permission"));
+        }
     }
 
     private void reloadPlugin(){

@@ -12,6 +12,9 @@ public interface MembersAPI {
     //Sends any member that might be in a party and returns the UUID of the party leader
     UUID getPartyLeader(UUID Player);
 
+    //checks if a player is the party leader
+    boolean isPartyLeader(UUID Player);
+
     //gets a list of all the party members by sending the UUID of any player in the party
     Set<UUID> getPartyMembers(UUID Player);
 

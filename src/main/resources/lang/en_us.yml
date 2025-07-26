@@ -3,7 +3,7 @@
 
 
 # General messages
-prefix: "&6[DDRPG] &r"
+prefix: "&6[Party] &r"
 no_permission: "&cYou don't have permission to use this command."
 player_only: "This command can only be used by players."
 
@@ -26,6 +26,8 @@ party:
     admin:
       help: "&e/party admin help &b - Prints this help message."
       reload: "&e/party admin reload &b - Reload the config, and languages."
+      socialspy: "&e/party admin socialspy &b - Turns on social spy for party chat messages."
+
 
   invite:
     sent: "&eYou have invited {target} to your party!"
@@ -35,6 +37,7 @@ party:
     from: "&dYou have been invite to a party by &e{inviter}"
     accept: "&eType &a/party accept {inviter} to &eto join."
     party_full: "&cThe party is full, you cannot invite more people. Max size is {max_size}"
+    same_player: "&cYou are not able to invite yourself to the party."
 
   join:
     already_in_party: "&cYou are already in a party"
@@ -92,9 +95,13 @@ party:
     toggled_on: "&7Party chat &aon&7."
     no_party: "&cYou are not in a party."
     message: "&b[Party] &f{player}: {message}"
+    socialspy: "&c[PartySocialSpy] &f{player}: {message}"
 
   create:
     created_party: "&aYou have created a party"
 
   admin:
+    socialspy_on: "&c[PartyAdmin] Social Spy turned on"
+    socialspy_off: "&c[PartyAdmin] Social Spy turned off"
     reload: "&aConfig and language files have been reloaded"
+

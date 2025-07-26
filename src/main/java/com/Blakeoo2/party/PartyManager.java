@@ -10,6 +10,7 @@ import java.util.*;
 public class PartyManager {
     private final Map<UUID, Party> playerParty = new HashMap<>();
     private final Set<UUID> partyChatToggled = new HashSet<>();
+    private final Set<UUID> partyChatSpy = new HashSet<>();
     private final Map<UUID, Long> lastSeenOffline = new HashMap<>();
     private final Main plugin;
 
@@ -374,7 +375,13 @@ public class PartyManager {
             }
         }
 
-
+        //Sends the social spy message
+        for (UUID spyID : partyChatSpy) {
+            Player spy = plugin.getServer().getPlayer(spyID);
+            if (spy != null) {
+                spy.sendMessage(plugin.getLanguageManager().getMessage("party.chat.socialspy", "player", name, "message", message));
+            }
+        }
     }
 
     public int getPartySize(UUID playerID){
@@ -418,4 +425,21 @@ public class PartyManager {
             partyChatToggled.remove(playerID);
         }
     }
+
+    public void toggleSocialSpy(UUID playerID){
+            if(partyChatSpy.contains(playerID)){
+                partyChatSpy.remove(playerID);
+                Player player = plugin.getServer().getPlayer(playerID);
+                if (player != null) {
+                    player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.socialspy_off"));
+                }
+            } else {
+                partyChatSpy.add(playerID);
+                Player player = plugin.getServer().getPlayer(playerID);
+                if (player != null) {
+                    player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.socialspy_on"));
+                }
+            }
+    }
 }
+

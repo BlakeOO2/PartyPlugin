@@ -21,11 +21,15 @@ public class MembersImpl implements MembersAPI {
         return partyManager.getPartySize(player);
     }
 
-    //TODO an issue when I use this in another plugin. it says that it requires a Party as an input
     @Override
     public UUID getPartyLeader(UUID Player) {
         Party party = partyManager.getParty(Player);
         return party.getLeader() != null ? party.getLeader() : null;
+    }
+
+    @Override
+    public boolean isPartyLeader(UUID Player) {
+        return partyManager.getParty(Player).getLeader().equals(Player);
     }
 
     @Override
