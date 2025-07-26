@@ -21,10 +21,9 @@ public class Main extends JavaPlugin {
         partyManager = new PartyManager(this);
         this.partyAPI = new PartyAPIImplementation(partyManager);
 
-//test
-        //TODO RegisterCommands();
-        //TODO RegisterListeners();
-        //TODO cleanUpOfflinePlayers();
+        registerCommands();
+        registerListeners();
+        cleanUpOfflinePlayers();
     }
 
     public void onDisable() {

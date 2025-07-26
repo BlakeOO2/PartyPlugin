@@ -1,5 +1,6 @@
 package com.Blakeoo2.PartyAPI.Members;
 
+import com.Blakeoo2.party.Party;
 import com.Blakeoo2.party.PartyManager;
 import com.Blakeoo2.Main;
 
@@ -17,19 +18,17 @@ public class MembersImpl implements MembersAPI {
 
     @Override
     public UUID getPartyLeader(UUID Player) {
-        //TODO returns the party leader
-        return null;
+        Party party = partyManager.getParty(Player);
+        return party.getLeader() != null ? party.getLeader() : null;
     }
 
     @Override
     public Set<UUID> getPartyMembers(UUID Player) {
-        //TODO returns the list of party members
-        return Set.of();
+        return partyManager.getParty(Player).getMembers();
     }
 
     @Override
     public boolean isInParty(UUID Player) {
-        //TODO returns true if player is in a party
-        return false;
+        return partyManager.getParty(Player) != null;
     }
 }
