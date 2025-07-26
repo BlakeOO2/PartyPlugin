@@ -37,7 +37,7 @@ public class Main extends JavaPlugin {
         //TODO make a command that will run this in game
     }
 
-    public void reginsterCommands(){
+    public void registerCommands(){
         //Base party command that allows for create, leave, accept, disband, invite, kick, list, promote, and chat
         getCommand("party").setExecutor(new PartyCommands(this));
         getCommand("partychat").setExecutor(new PartyChatCommand(this));
