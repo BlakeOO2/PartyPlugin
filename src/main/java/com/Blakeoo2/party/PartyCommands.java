@@ -179,8 +179,14 @@ public class PartyCommands implements CommandExecutor {
                                 reloadPlugin();
                                 player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.reload"));
                                 break;
+                            case "socialspy":
+                                //TODO create an admin command to allow peoples with a specific permission node to turn on party chat spy
+                                //TODO need to create en_us message
+                                //TODO create function
+                                break;
                             default:
                                 showAdminHelp(player);
+                                break;
                         }
                     } else {
                         showHelp(player);

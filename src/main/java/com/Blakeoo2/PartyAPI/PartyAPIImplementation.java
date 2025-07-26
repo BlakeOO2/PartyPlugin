@@ -10,10 +10,9 @@ import com.Blakeoo2.party.PartyManager;
 
 public class PartyAPIImplementation implements PartyAPI{
 
-    private final PartyManager partyManager;
 
-    public PartyAPIImplementation(PartyManager partyManager){
-        this.partyManager = partyManager;
+    public PartyAPIImplementation(){
+
     }
 
 
