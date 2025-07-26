@@ -26,3 +26,14 @@ permissions:
   PartyPlugin.bypass.maxSize:
     default: op
     description: Allows the user to join a party when it is full
+
+
+  PartyPlugin.admin.*:
+    default: op
+    description: Base permission for admin party command
+    children:
+      - PartyPlugin.admin.reload
+
+  PartyPlugin.admin.reload:
+    default: op
+    description: Allows the admin to reload all config files.

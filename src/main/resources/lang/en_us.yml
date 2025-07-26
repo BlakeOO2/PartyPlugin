@@ -22,6 +22,11 @@ party:
     disband: "&e/party disband &b - Disbands the party."
     chat: "&e/party chat &b toggles party chat"
 
+
+    admin:
+      help: "&e/party admin help &b - Prints this help message."
+      reload: "&e/party admin reload &b - Reload the config, and languages."
+
   invite:
     sent: "&eYou have invited {target} to your party!"
     no_party: "&cYou are not in a party."

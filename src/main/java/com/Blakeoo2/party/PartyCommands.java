@@ -150,6 +150,18 @@ public class PartyCommands implements CommandExecutor {
                         plugin.getPartyManager().sendPartyMessage(player.getUniqueId(), message);
                     }
                     break;
+                case "admin":
+                    if (player.hasPermission("PartyPlugin.admin")) {
+                        switch (args[1].toLowerCase()) {
+                            case "help":
+                                showAdminHelp(player);
+                                break;
+                            case "reload":
+                                reloadPlugin();
+                        }
+                    } else {
+                        showHelp(player);
+                    }
                 default:
                     showHelp(player);
             }
@@ -174,6 +186,15 @@ public class PartyCommands implements CommandExecutor {
         player.sendMessage(plugin.getLanguageManager().getMessage("party.help.disband"));
         player.sendMessage(plugin.getLanguageManager().getMessage("party.help.chat"));
 
+    }
+
+    private void showAdminHelp(Player player) {
+        player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.help"));
+        player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.reload"));
+    }
+
+    private void reloadPlugin(){
+        plugin.reload();
     }
 }
 

@@ -32,8 +32,7 @@ public class Main extends JavaPlugin {
 
     public void reload(){
         reloadConfig();
-        //TODO make this reload language file as well
-        //TODO make a command that will run this in game
+        languageManager.reloadLanguages();
     }
 
     public void registerCommands(){
@@ -41,8 +40,6 @@ public class Main extends JavaPlugin {
         getCommand("party").setExecutor(new PartyCommands(this));
         getCommand("partychat").setExecutor(new PartyChatCommand(this));
         //TODO create subcommands for party create, party invite, party leave, party join, party kick, party list, party info, party delete
-        //TODO create command for config reload
-
     }
 
     public void registerListeners(){
@@ -74,6 +71,8 @@ public class Main extends JavaPlugin {
     public PartyAPI getPartyAPI() {
         return partyAPI;
     }
+
+
 
 }
 

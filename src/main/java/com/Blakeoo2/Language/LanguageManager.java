@@ -111,11 +111,7 @@ public class LanguageManager {
         return message.replace("&", "§");
     }
 
-    public void reloadLanguages() {
-        languageFiles.clear();
-        currentLanguage = plugin.getConfig().getString("language", defaultLanguage);
-        loadLanguages();
-    }
+
 
     public void saveLanguageFile(String language) {
         FileConfiguration langConfig = languageFiles.get(language);
@@ -142,5 +138,33 @@ public class LanguageManager {
         }
 
         return result.toString().trim(); // To remove the trailing space
+    }
+
+    public void reloadLanguages() {
+        File langDir = new File(plugin.getDataFolder(), "lang");
+
+        if (!langDir.exists() || !langDir.isDirectory()) {
+            plugin.getLogger().warning("Language folder not found, creating a new one.");
+            langDir.mkdirs();
+            return;
+        }
+
+        File[] files = langDir.listFiles((dir, name) -> name.endsWith(".yml"));
+
+        if (files == null || files.length == 0) {
+            plugin.getLogger().warning("No language files found in the 'lang' folder.");
+            return;
+        }
+
+        languageFiles.clear(); // Clear previously loaded language files to avoid duplications
+
+        for (File file : files) {
+            String fileName = file.getName();
+            String language = fileName.substring(0, fileName.lastIndexOf('.')); // Remove the .yml extension
+
+            // Load the language file
+            plugin.getLogger().info("Reloading language file: " + fileName);
+            loadLanguage(language);
+        }
     }
 }
