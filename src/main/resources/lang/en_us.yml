@@ -21,7 +21,7 @@ party:
     accept: "&e/party accept <username> &b - Accept a party invite from the player."
     disband: "&e/party disband &b - Disbands the party."
     chat: "&e/party chat &b toggles party chat"
-
+    adminHelp: "&e/party admin &b Shows the admin commands for Party"
 
     admin:
       help: "&e/party admin help &b - Prints this help message."

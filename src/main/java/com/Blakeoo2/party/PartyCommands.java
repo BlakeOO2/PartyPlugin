@@ -185,6 +185,9 @@ public class PartyCommands implements CommandExecutor {
         player.sendMessage(plugin.getLanguageManager().getMessage("party.help.accept"));
         player.sendMessage(plugin.getLanguageManager().getMessage("party.help.disband"));
         player.sendMessage(plugin.getLanguageManager().getMessage("party.help.chat"));
+        if (player.hasPermission("PartyPlugin.admin")) {
+            player.sendMessage(plugin.getLanguageManager().getMessage("party.help.adminHelp"));
+        }
 
     }
 
