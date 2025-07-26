@@ -1,7 +1,9 @@
 package com.Blakeoo2;
 
 import com.Blakeoo2.Language.LanguageManager;
-import com.Blakeoo2.party.PartyManager;
+import com.Blakeoo2.PartyAPI.PartyAPI;
+import com.Blakeoo2.PartyAPI.PartyAPIImplementation;
+import com.Blakeoo2.party.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -10,12 +12,15 @@ public class Main extends JavaPlugin {
    private static Main plugin;
    private LanguageManager languageManager;
    private PartyManager partyManager;
+   private PartyAPI partyAPI;
 
     public void onEnable() {
         saveDefaultConfig();
         plugin = this;
         languageManager = new LanguageManager(this);
-        //TODO PartyManager partyManager = new PartyManager(this);
+        partyManager = new PartyManager(this);
+        this.partyAPI = new PartyAPIImplementation(partyManager);
+
 
         //TODO RegisterCommands();
         //TODO RegisterListeners();
@@ -33,16 +38,17 @@ public class Main extends JavaPlugin {
     }
 
     public void reginsterCommands(){
-        //TODO create base party command
+        //Base party command that allows for create, leave, accept, disband, invite, kick, list, promote, and chat
+        getCommand("party").setExecutor(new PartyCommands(this));
+        getCommand("partychat").setExecutor(new PartyChatCommand(this));
         //TODO create subcommands for party create, party invite, party leave, party join, party kick, party list, party info, party delete
-        //TODO create command for party chat
         //TODO create command for config reload
 
     }
 
     public void registerListeners(){
-        //TODO need listeners for player joining/leaving
-        //TODO need listeners for party chat
+        //Listener for chat and join/quit for party members
+        getServer().getPluginManager().registerEvents(new PartyListener(this), this);
     }
 
     public void cleanUpOfflinePlayers(){
@@ -64,10 +70,9 @@ public class Main extends JavaPlugin {
     }
 
 
+    public PartyAPI getPartyAPI() {
+        return partyAPI;
+    }
 
 }
 
-//TODO*
-//
-//
-// *//
