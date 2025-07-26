@@ -247,6 +247,7 @@ public class PartyManager {
         //check to see if you are trying to promote yourself
         if (newLeaderId.equals(oldLeaderId)) {
             plugin.getServer().getPlayer(newLeaderId).sendMessage(plugin.getLanguageManager().getMessage("party.promote.same_player"));
+            return;
         }
 
         //sets the new leader of the party
