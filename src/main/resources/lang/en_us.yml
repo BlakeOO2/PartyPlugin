@@ -95,3 +95,6 @@ party:
 
   create:
     created_party: "&aYou have created a party"
+
+  admin:
+    reload: "&aConfig and language files have been reloaded"

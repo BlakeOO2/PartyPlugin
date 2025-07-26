@@ -152,18 +152,44 @@ public class PartyCommands implements CommandExecutor {
                     break;
                 case "admin":
                     if (player.hasPermission("PartyPlugin.admin")) {
+                        if (args.length == 0) {
+                            showAdminHelp(player);
+                            break;
+
+                        }
+
+
+                        // Debugging args
+                        for (int i = 0; i < args.length; i++) {
+                            plugin.debug("Party executed with arg " + i + ": " + args[i]);
+                        }
+
+                        // Ensure args[1] exists before accessing it
+                        if (args.length < 2) {
+                            showAdminHelp(player);
+                            break;
+                        }
+
+
                         switch (args[1].toLowerCase()) {
                             case "help":
                                 showAdminHelp(player);
                                 break;
                             case "reload":
                                 reloadPlugin();
+                                player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.reload"));
+                                break;
+                            default:
+                                showAdminHelp(player);
                         }
                     } else {
                         showHelp(player);
+                        break;
                     }
+                    break;
                 default:
                     showHelp(player);
+                    break;
             }
 
         } catch (Exception e) {
