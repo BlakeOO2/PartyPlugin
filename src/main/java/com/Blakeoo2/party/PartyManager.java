@@ -42,6 +42,12 @@ public class PartyManager {
             //return;
         }
 
+        //Checks to see if the person sending the invite is trying to invite themselves
+        if (inviter.equals(invitee)) {
+            plugin.getServer().getPlayer(inviter).sendMessage(plugin.getLanguageManager().getMessage("party.invite.same_player"));
+            return;
+        }
+
         if (playerParty.containsKey(invitee)){
             plugin.getServer().getPlayer(invitee).sendMessage(plugin.getLanguageManager().getMessage("party.invite.already_in_party"));
             return;
