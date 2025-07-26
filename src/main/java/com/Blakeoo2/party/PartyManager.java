@@ -2,6 +2,7 @@ package com.Blakeoo2.party;
 
 
 import com.Blakeoo2.Main;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -367,6 +368,28 @@ public class PartyManager {
         }
 
 
+    }
+
+    public int getPartySize(UUID playerID){
+        Party party = getParty(playerID);
+        if (party == null) {
+            return 0;
+        }
+        return party.getMembers().size();
+    }
+
+    public void teleportParty(UUID playerID, Location location){
+        Party party = getParty(playerID);
+        if (party == null) {
+            return;
+        }
+        //TODO needs to check to make sure that this takes the person to the right world and locatoin
+        for (UUID memberId : party.getMembers()) {
+            Player member = plugin.getServer().getPlayer(memberId);
+            if (member != null) {
+                member.teleport(location);
+            }
+        }
     }
 
 }
