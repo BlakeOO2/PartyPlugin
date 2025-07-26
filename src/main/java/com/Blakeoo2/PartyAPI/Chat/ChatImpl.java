@@ -12,6 +12,6 @@ public class ChatImpl implements ChatAPI {
 
 
     public void setPartyChat(UUID playerID, boolean partyChatActive) {
-
+        partyManager.setPartysChat(playerID, partyChatActive);
     }
 }
