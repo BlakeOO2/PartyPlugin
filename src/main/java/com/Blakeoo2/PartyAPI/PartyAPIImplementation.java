@@ -12,8 +12,8 @@ import com.Blakeoo2.party.PartyManager;
 public class PartyAPIImplementation implements PartyAPI{
     private final Main plugin;
 
-    public PartyAPIImplementation(Main plugin){
-        this.plugin = plugin;
+    public PartyAPIImplementation(){
+        this.plugin = Main.getInstance();
 
     }
 

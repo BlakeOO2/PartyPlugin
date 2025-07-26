@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
         plugin = this;
         languageManager = new LanguageManager(this);
         partyManager = new PartyManager(this);
-        this.partyAPI = new PartyAPIImplementation(this);
+        this.partyAPI = new PartyAPIImplementation();
 
         registerCommands();
         registerListeners();
@@ -70,6 +70,10 @@ public class Main extends JavaPlugin {
 
     public PartyAPI getPartyAPI() {
         return partyAPI;
+    }
+
+    public static Main getInstance() {
+        return plugin;
     }
 
 
