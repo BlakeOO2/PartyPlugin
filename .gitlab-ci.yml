@@ -28,10 +28,11 @@ build:
 
 tag:
   stage: tag
-  image: alpine/git
+  image: bash:latest
   dependencies:
     - build
   script:
+    - apk add --no-cache git
     - VERSION=$(cat version.txt)
     - git config --global user.email "ci@gitlab.com"
     - git config --global user.name "GitLab CI"
