@@ -394,13 +394,21 @@ public class PartyManager {
 
     public void setPartysChat(UUID playerID, boolean chat){
         Party party = getParty(playerID);
-        
+
         for (UUID memberId : party.getMembers()) {
             if(chat){
                 partyChatToggled.add(memberId);
             } else {
                 partyChatToggled.remove(memberId);
             }
+        }
+    }
+
+    public void setPlayerPartyChat(UUID playerID, boolean chat){
+        if(chat){
+            partyChatToggled.add(playerID);
+        } else {
+            partyChatToggled.remove(playerID);
         }
     }
 }

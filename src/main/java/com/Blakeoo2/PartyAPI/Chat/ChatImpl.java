@@ -12,6 +12,11 @@ public class ChatImpl implements ChatAPI {
 
 
     public void setPartyChat(UUID playerID, boolean partyChatActive) {
+        //this will turn party chat on or off for the whole party
         partyManager.setPartysChat(playerID, partyChatActive);
+    }
+
+    public void setPlayerPartyChat(UUID playerID, boolean partyChatActive){
+
     }
 }
