@@ -52,7 +52,9 @@ public class Main extends JavaPlugin {
     }
 
     public void cleanUpOfflinePlayers(){
-        //TODO remove players that have been offline for to long check the config to get this number
+        getServer().getScheduler().runTaskTimer(this, () -> {
+            getPartyManager().cleanupOfflineMembers();
+        }, 20L * 60, 20L * 60);
     }
 
     public void debug(String message){
