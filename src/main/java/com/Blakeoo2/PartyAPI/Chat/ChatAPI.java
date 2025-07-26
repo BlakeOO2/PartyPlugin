@@ -1,4 +1,4 @@
-package com.Blakeoo2.PartyAPI;
+package com.Blakeoo2.PartyAPI.Chat;
 
 public interface ChatAPI {
 

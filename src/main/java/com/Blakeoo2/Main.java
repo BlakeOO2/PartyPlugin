@@ -1,10 +1,9 @@
 package com.Blakeoo2;
 
 import com.Blakeoo2.Language.LanguageManager;
-import com.Blakeoo2.party.PartyChatCommand;
-import com.Blakeoo2.party.PartyCommands;
-import com.Blakeoo2.party.PartyListener;
-import com.Blakeoo2.party.PartyManager;
+import com.Blakeoo2.PartyAPI.PartyAPI;
+import com.Blakeoo2.PartyAPI.PartyAPIImplementation;
+import com.Blakeoo2.party.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -13,12 +12,15 @@ public class Main extends JavaPlugin {
    private static Main plugin;
    private LanguageManager languageManager;
    private PartyManager partyManager;
+   private PartyAPI partyAPI;
 
     public void onEnable() {
         saveDefaultConfig();
         plugin = this;
         languageManager = new LanguageManager(this);
-        PartyManager partyManager = new PartyManager(this);
+        partyManager = new PartyManager(this);
+        this.partyAPI = new PartyAPIImplementation(partyManager);
+
 
         //TODO RegisterCommands();
         //TODO RegisterListeners();
@@ -68,6 +70,9 @@ public class Main extends JavaPlugin {
     }
 
 
+    public PartyAPI getPartyAPI() {
+        return partyAPI;
+    }
 
 }
 
