@@ -10,6 +10,10 @@ public class ChatImpl implements ChatAPI {
     private Main plugin;
     PartyManager partyManager = plugin.getPartyManager();
 
+    public ChatImpl(Main plugin){
+        this.plugin = plugin;
+    }
+
 
     public void setPartyChat(UUID playerID, boolean partyChatActive) {
         //this will turn party chat on or off for the whole party

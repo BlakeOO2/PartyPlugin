@@ -9,7 +9,12 @@ import java.util.UUID;
 
 public class MembersImpl implements MembersAPI {
     private Main plugin;
-    PartyManager partyManager = plugin.getPartyManager();
+    PartyManager partyManager;
+
+    public MembersImpl(Main plugin){
+        this.plugin = plugin;
+        this.partyManager  = plugin.getPartyManager();
+    }
 
 
     public int getPartySize(UUID player) {

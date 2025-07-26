@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
         plugin = this;
         languageManager = new LanguageManager(this);
         partyManager = new PartyManager(this);
-        this.partyAPI = new PartyAPIImplementation();
+        this.partyAPI = new PartyAPIImplementation(this);
 
         registerCommands();
         registerListeners();

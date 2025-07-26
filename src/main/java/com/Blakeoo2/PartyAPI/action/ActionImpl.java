@@ -10,6 +10,10 @@ public class ActionImpl implements ActionAPI{
     private Main plugin;
     PartyManager partyManager = plugin.getPartyManager();
 
+    public ActionImpl(Main plugin){
+        this.plugin = plugin;
+    }
+
     @Override
     public void teleportParty(UUID playerID, Location location) {
         partyManager.teleportParty(playerID, location);
