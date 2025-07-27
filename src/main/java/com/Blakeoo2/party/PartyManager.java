@@ -403,7 +403,7 @@ public class PartyManager {
 
 
 
-    public void sendPartyMessage(UUID playerID, String message){
+    public void sendPartyMessage(UUID playerID, String message) {
         Party party = getParty(playerID);
         if (party == null) {
             plugin.getServer().getPlayer(playerID).sendMessage(plugin.getLanguageManager().getMessage("party.chat.no_party"));
@@ -413,6 +413,7 @@ public class PartyManager {
         Player sender = plugin.getServer().getPlayer(playerID);
         String name = sender != null ? sender.getName() : "Unknown";
 
+        // Send the message to all party members
         for (UUID memberId : party.getMembers()) {
             Player member = plugin.getServer().getPlayer(memberId);
             if (member != null) {
@@ -420,8 +421,13 @@ public class PartyManager {
             }
         }
 
-        //Sends the social spy message
+        // Send the message to social spies who are not part of the sender's party
         for (UUID spyID : partyChatSpy) {
+            // Skip spies who are part of the sender's party to avoid duplicate messages
+            if (party.getMembers().contains(spyID)) {
+                continue;
+            }
+
             Player spy = plugin.getServer().getPlayer(spyID);
             if (spy != null) {
                 spy.sendMessage(plugin.getLanguageManager().getMessage("party.chat.socialspy", "player", name, "message", message));
