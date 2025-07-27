@@ -50,4 +50,17 @@ public class PartyListener implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void onChat(AsyncChatEvent event){
+        Player player = event.getPlayer();
+
+        if (plugin.getPartyManager().isPartyChatToggled(player.getUniqueId())){
+            Component message = event.message();
+            String plainText = PlainTextComponentSerializer.plainText().serialize(message);
+            plugin.debug("Party chat message received from " + player.getName() + ": " + plainText);
+            event.setCancelled(true);
+            plugin.getPartyManager().sendPartyMessage(player.getUniqueId(), plainText);
+        }
+    }
 }
