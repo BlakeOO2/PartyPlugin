@@ -38,6 +38,11 @@ public class MembersImpl implements MembersAPI {
     }
 
     @Override
+    public Set<UUID> getPartyMembersInRange(UUID player, int range) {
+        return partyManager.getPartyMembersInRange(player, range);
+    }
+
+    @Override
     public boolean isInParty(UUID Player) {
         return partyManager.getParty(Player) != null;
     }

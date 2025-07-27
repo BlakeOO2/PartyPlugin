@@ -18,6 +18,8 @@ public interface MembersAPI {
     //gets a list of all the party members by sending the UUID of any player in the party
     Set<UUID> getPartyMembers(UUID Player);
 
+    Set<UUID> getPartyMembersInRange(UUID Player, int range);
+
     //checks if a player is in a party
     boolean isInParty(UUID Player);
 

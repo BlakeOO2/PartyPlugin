@@ -239,6 +239,37 @@ public class PartyManager {
         }
     }
 
+    public Set<UUID> getPartyMembersInRange(UUID player, int range) {
+        Party party = getParty(player);
+        if (party == null) {
+            return Set.of(); // Player is not in a party
+        }
+
+        Player mainPlayer = plugin.getServer().getPlayer(player);
+        if (mainPlayer == null) {
+            return Set.of(); // Player not online
+        }
+
+        Location playerLocation = mainPlayer.getLocation();
+        Set<UUID> membersInRange = new HashSet<>();
+
+        for (UUID memberId : party.getMembers()) {
+            if (memberId.equals(player)) {
+                continue; // Skip the player themselves
+            }
+
+            Player member = plugin.getServer().getPlayer(memberId);
+            if (member != null && member.getLocation().getWorld().equals(playerLocation.getWorld())) {
+                double distance = member.getLocation().distance(playerLocation);
+                if (distance <= range) {
+                    membersInRange.add(memberId);
+                }
+            }
+        }
+
+        return membersInRange;
+    }
+
     public void promoteMember(UUID oldLeaderId, UUID newLeaderId){
         Party party = getParty(oldLeaderId);
 
