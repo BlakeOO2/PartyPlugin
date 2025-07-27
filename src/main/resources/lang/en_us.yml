@@ -107,6 +107,7 @@ party:
 
   create:
     created_party: "&aYou have created a party"
+    already_in_party: "&cYou can no create a party if you are already in one."
 
   admin:
     socialspy_on: "&c[PartyAdmin] Social Spy turned on"

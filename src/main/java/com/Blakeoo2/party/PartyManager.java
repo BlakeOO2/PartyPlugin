@@ -24,12 +24,18 @@ public class PartyManager {
     }
 
     public void createParty(UUID leader){
-        Party party = new Party(leader);
-        playerParty.put(leader, party);
         Player leaderPlayer = plugin.getServer().getPlayer(leader);
-        if (leaderPlayer != null) {
-            leaderPlayer.sendMessage(plugin.getLanguageManager().getMessage("party.create.created_party"));
+        if (!playerParty.containsKey(leader)) {
+            Party party = new Party(leader);
+            playerParty.put(leader, party);
+
+            if (leaderPlayer != null) {
+                leaderPlayer.sendMessage(plugin.getLanguageManager().getMessage("party.create.created_party"));
+            }
+        } else {
+            leaderPlayer.sendMessage(plugin.getLanguageManager().getMessage("party.create.already_in_party"));
         }
+
     }
 
     public void invite(UUID inviter, UUID invitee){
