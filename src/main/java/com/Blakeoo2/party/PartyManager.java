@@ -57,7 +57,7 @@ public class PartyManager {
         }
 
         if (playerParty.containsKey(invitee)){
-            plugin.getServer().getPlayer(invitee).sendMessage(plugin.getLanguageManager().getMessage("party.invite.already_in_party"));
+            plugin.getServer().getPlayer(inviter).sendMessage(plugin.getLanguageManager().getMessage("party.invite.already_in_party"));
             return;
         }
         //Check to see if the party is full before sending the invite, gets the number from the config
@@ -73,7 +73,7 @@ public class PartyManager {
         }
 
         if (party.getInvited().contains(invitee)) {
-            plugin.getServer().getPlayer(invitee).sendMessage(plugin.getLanguageManager().getMessage("party.invite.already_invited"));
+            plugin.getServer().getPlayer(inviter).sendMessage(plugin.getLanguageManager().getMessage("party.invite.already_invited"));
             return;
         }
 
