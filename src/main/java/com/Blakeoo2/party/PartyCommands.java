@@ -64,7 +64,7 @@ public class PartyCommands implements CommandExecutor {
                     Player target = plugin.getServer().getPlayer(args[1]);
                     if (target != null) {
                         plugin.getPartyManager().invite(player.getUniqueId(), target.getUniqueId());
-                        player.sendMessage(plugin.getLanguageManager().getMessage("party.invite.sent", "target", target.getName()));
+                        //player.sendMessage(plugin.getLanguageManager().getMessage("party.invite.sent", "target", target.getName()));
                     } else {
                         player.sendMessage(plugin.getLanguageManager().getMessage("party.invite.not_online"));
                     }
@@ -186,6 +186,7 @@ public class PartyCommands implements CommandExecutor {
                                 break;
                             case "socialspy":
                             case "ss":
+                                //TODO needs to make sure that it does not send the message twice when an admin is in a party
                                 if(player.hasPermission("PartyPlugin.admin.socialspy")){
                                     plugin.getPartyManager().toggleSocialSpy(player.getUniqueId());
                                     break;

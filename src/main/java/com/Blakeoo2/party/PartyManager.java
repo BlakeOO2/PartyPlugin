@@ -71,6 +71,9 @@ public class PartyManager {
         }
 
         party.getInvited().add(invitee);
+        Player target = plugin.getServer().getPlayer(inviter);
+        Player inviterPlayer = plugin.getServer().getPlayer(inviter);
+        inviterPlayer.sendMessage(plugin.getLanguageManager().getMessage("party.invite.sent", "target", target.getName()));
 
         Player inviteePlayer = plugin.getServer().getPlayer(invitee);
         if (inviteePlayer != null) {

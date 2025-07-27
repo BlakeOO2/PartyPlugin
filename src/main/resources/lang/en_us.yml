@@ -76,6 +76,7 @@ party:
     promote: "&cUsage: /party promote <player>"
     kick: "&cUsage: /party kick <player>"
     invite: "&cUsage: /party invite <player>"
+    accept: "&CUsage: /party accept <player>"
 
   kick:
     no_party:  "&cYou are not in a party."

@@ -30,10 +30,16 @@ permissions:
 
   PartyPlugin.admin.*:
     default: op
-    description: Base permission for admin party command
+    description: Permission node for all admin party command
     children:
       - PartyPlugin.admin.reload
       - PartyPlugin.admin.socialspy
+      - PartyPlugin.admin
+
+  PartyPlugin.admin:
+    default: op
+    description: base permission node for admin, have to have this one one or none of them will work
+
 
   PartyPlugin.admin.reload:
     default: op
