@@ -46,6 +46,9 @@ party:
     another_join_party: "&a{player} has joined the party"
     not_invited: "&cYou do not have an invite from this player's party, or the party has been disbanded."
     party_full: "&cThe party you are trying to join is full. Max size is {max_size}."
+    no_recent_invite: "You have no recent party invite."
+    accepted: "You have joined the party hosted by {inviter}."
+    not_invited_recent: "You are not invited to any party at the moment."
 
   list:
     no_party: "&cYou are not in a party."

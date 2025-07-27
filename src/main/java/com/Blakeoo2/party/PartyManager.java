@@ -12,6 +12,7 @@ public class PartyManager {
     private final Set<UUID> partyChatToggled = new HashSet<>();
     private final Set<UUID> partyChatSpy = new HashSet<>();
     private final Map<UUID, Long> lastSeenOffline = new HashMap<>();
+    private final Map<UUID, UUID> lastInvites = new HashMap<>();
     private final Main plugin;
 
     public PartyManager(Main plugin) {
@@ -57,7 +58,7 @@ public class PartyManager {
         if (party.getMembers().size() >= plugin.getConfig().getInt("Party.maxSize")) {
             Player inviterPlayer = plugin.getServer().getPlayer(inviter);
 
-            if (inviterPlayer != null && inviterPlayer.hasPermission("DDRPG.party.bypass.maxSize:")) {
+            if (inviterPlayer != null && inviterPlayer.hasPermission("PartyPlugin.bypass.maxSize:")) {
                 plugin.getServer().getPlayer(inviter).sendMessage(plugin.getLanguageManager().getMessage("party.invite.party_full", "max_size", plugin.getConfig().getInt("Party.maxSize") + ""));
                 return;
 
@@ -74,6 +75,10 @@ public class PartyManager {
         Player target = plugin.getServer().getPlayer(inviter);
         Player inviterPlayer = plugin.getServer().getPlayer(inviter);
         inviterPlayer.sendMessage(plugin.getLanguageManager().getMessage("party.invite.sent", "target", target.getName()));
+
+        // Store the most recent inviter for the invitee
+        lastInvites.put(invitee, inviter);
+
 
         Player inviteePlayer = plugin.getServer().getPlayer(invitee);
         if (inviteePlayer != null) {
@@ -135,7 +140,7 @@ public class PartyManager {
             Player joiningPlayer = plugin.getServer().getPlayer(playerId);
 
             //Check to see if the player is valid or has the bypass max size permission, if not then send a message to the player
-            if(joiningPlayer != null && joiningPlayer.hasPermission("DDRPG.party.bypass.maxSize:")){
+            if(joiningPlayer != null && joiningPlayer.hasPermission("PartyPlugin.bypass.maxSize:")){
                 plugin.getServer().getPlayer(targetParty).sendMessage(plugin.getLanguageManager().getMessage("party.join.party_full", "max_size", plugin.getConfig().getInt("Party.maxSize") + ""));
 
             }
@@ -444,5 +449,10 @@ public class PartyManager {
                 }
             }
     }
+
+    public UUID getLastInviter(UUID invitee) {
+        return lastInvites.get(invitee); // Returns null if no recent invite
+    }
+
 }
 

@@ -64,7 +64,6 @@ public class PartyCommands implements CommandExecutor {
                     Player target = plugin.getServer().getPlayer(args[1]);
                     if (target != null) {
                         plugin.getPartyManager().invite(player.getUniqueId(), target.getUniqueId());
-                        //player.sendMessage(plugin.getLanguageManager().getMessage("party.invite.sent", "target", target.getName()));
                     } else {
                         player.sendMessage(plugin.getLanguageManager().getMessage("party.invite.not_online"));
                     }
@@ -130,11 +129,22 @@ public class PartyCommands implements CommandExecutor {
                     break;
                 case "accept":
                 case "a":
-                    //TODO make it so if they just run /party accept it will accept the last party invite they received
-                    if (args.length < 2) { // Validate args[1] exists
-                        player.sendMessage(plugin.getLanguageManager().getMessage("party.usage.accept"));
+                    // Handling the case where no argument is provided
+                    if (args.length < 2) {
+                        UUID lastInviter = plugin.getPartyManager().getLastInviter(player.getUniqueId());
+
+                        // If there is no last inviter record
+                        if (lastInviter == null) {
+                            player.sendMessage(plugin.getLanguageManager().getMessage("party.join.no_recent_invite"));
+                            break;
+                        }
+
+                        // Attempt to join the party
+                        plugin.getPartyManager().joinParty(player.getUniqueId(), lastInviter);
                         break;
                     }
+
+                    // Handling the case where an inviter's name is manually provided
                     Player targetParty = plugin.getServer().getPlayer(args[1]);
                     if (targetParty != null) {
                         plugin.getPartyManager().joinParty(player.getUniqueId(), targetParty.getUniqueId());
@@ -142,6 +152,7 @@ public class PartyCommands implements CommandExecutor {
                         player.sendMessage(plugin.getLanguageManager().getMessage("party.join.not_invited"));
                     }
                     break;
+
                 case "disband":
                     plugin.getPartyManager().disbandParty(player.getUniqueId());
                     break;
