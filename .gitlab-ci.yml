@@ -1,0 +1,61 @@
+stages:
+  - build
+  - tag
+  - release
+
+variables:
+  MAVEN_CLI_OPTS: "-B -DskipTests"
+
+# Run only on pushes to main
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+build:
+  stage: build
+  image: maven:3.9.6-eclipse-temurin-21
+  script:
+    - mvn $MAVEN_CLI_OPTS package
+    - |
+      VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+      echo "Version: $VERSION"
+      echo "$VERSION" > version.txt
+  artifacts:
+    paths:
+      - target/*.jar
+      - version.txt
+    expire_in: 1 hour
+
+tag:
+  stage: tag
+  image: bash:latest
+  dependencies:
+    - build
+  script:
+    - apk add --no-cache git
+    - VERSION=$(cat version.txt)
+    - git config --global user.email "ci@gitlab.com"
+    - git config --global user.name "GitLab CI"
+    - git tag -a "v$VERSION" -m "Release v$VERSION"
+    - git push origin "v$VERSION"
+  only:
+    - main
+
+release:
+  stage: release
+  image: curlimages/curl:latest
+  dependencies:
+    - build
+  script:
+    - VERSION=$(cat version.txt)
+    - JAR_FILE=$(ls target/*.jar | head -n 1)
+    - >
+      curl --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN"
+      --form "name=Release v$VERSION"
+      --form "tag_name=v$VERSION"
+      --form "description=Automated release for version $VERSION"
+      --form "assets[links][][name]=Download Jar"
+      --form "assets[links][][url]=$CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/file/$JAR_FILE"
+      "$CI_API_V4_URL/projects/$CI_PROJECT_ID/releases"
+  only:
+    - main
