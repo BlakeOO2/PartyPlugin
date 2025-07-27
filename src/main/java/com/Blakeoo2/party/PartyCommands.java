@@ -207,7 +207,7 @@ public class PartyCommands implements CommandExecutor {
                             case "seeparty":
                                 if (player.hasPermission("PartyPlugin.admin.seeParty")) {
                                     if (args.length < 3) { // Ensure the target player's name is provided
-                                        player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.usage.seeparty"));
+                                        player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.seeparty"));
                                         break;
                                     }
 

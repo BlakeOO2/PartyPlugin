@@ -27,7 +27,7 @@ party:
       help: "&e/party admin help &b - Prints this help message."
       reload: "&e/party admin reload &b - Reload the config, and languages."
       socialspy: "&e/party admin socialspy &b - Turns on social spy for party chat messages."
-      seeParty: "&e/party admin seeparty <player> &b - See the members inside of a player's party.."
+      seeParty: "&e/party admin seeparty <player> &b - See the members inside of a player's party."
 
 
   invite:
@@ -81,7 +81,7 @@ party:
     kick: "&cUsage: /party kick <player>"
     invite: "&cUsage: /party invite <player>"
     accept: "&CUsage: /party accept <player>"
-    seeparty: "Usage: /party admin seeparty <player>"
+
 
 
   kick:
