@@ -131,6 +131,9 @@ Provides methods to retrieve and manage party-related information.
 5. **`boolean isInParty(UUID Player)`**  
    Checks if the specified player is in a party.
 
+6. **`Set<UUID> getPartyMembersInRange(UUID Player, int range);`**
+   Looks to see all party members that are in the range of that player
+
 ---
 
 
@@ -147,3 +150,10 @@ Handles party chat settings.
    Links a player's chat behavior with their party status.
 
 ---
+
+---
+### ActionAPI.java
+Handles actions to the party
+
+1. **`void teleportParty(UUID playerID, Location location);`**
+   Teleports the whole party to a location
