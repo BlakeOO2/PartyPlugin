@@ -38,6 +38,7 @@ party:
     accept: "&eType &a/party accept {inviter} to &eto join."
     party_full: "&cThe party is full, you cannot invite more people. Max size is {max_size}"
     same_player: "&cYou are not able to invite yourself to the party."
+    not_online: "&cThat player is not online."
 
   join:
     already_in_party: "&cYou are already in a party"
