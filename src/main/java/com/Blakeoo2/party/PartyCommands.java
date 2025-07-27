@@ -204,7 +204,54 @@ public class PartyCommands implements CommandExecutor {
                                 }
                                     player.sendMessage(plugin.getLanguageManager().getMessage("no_permission"));
                                     break;
-                            //TODO admin command to see who is in whos party
+                            case "seeparty":
+                                if (player.hasPermission("PartyPlugin.admin.seeParty")) {
+                                    if (args.length < 3) { // Ensure the target player's name is provided
+                                        player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.usage.seeparty"));
+                                        break;
+                                    }
+
+                                    // Look up the target player
+                                    Player targetPlayer = plugin.getServer().getPlayer(args[2]);
+                                    if (targetPlayer == null) {
+                                        player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.player_not_online", "player", args[2]));
+                                        break;
+                                    }
+
+                                    UUID targetPlayerId = targetPlayer.getUniqueId();
+                                    Party targetsParty = plugin.getPartyManager().getParty(targetPlayerId);
+
+                                    // Check if the target player is in a party
+                                    if (targetsParty == null) {
+                                        player.sendMessage(plugin.getLanguageManager().getMessage("party.admin.not_in_party", "player", targetPlayer.getName()));
+                                        break;
+                                    }
+
+                                    // Simulate sending party list information to the admin
+                                    player.sendMessage(plugin.getLanguageManager().getMessage("party.list.top_of_party_member_list"));
+
+                                    // Show the leader
+                                    String leaderName = plugin.getServer().getOfflinePlayer(targetsParty.getLeader()).getName();
+                                    player.sendMessage(plugin.getLanguageManager().getMessage("party.list.leader", "player", leaderName));
+
+                                    // Display the party members
+                                    for (UUID memberId : targetsParty.getMembers()) {
+                                        Player partyMember = plugin.getServer().getPlayer(memberId);
+                                        String memberName = (partyMember != null) ? partyMember.getName() : plugin.getServer().getOfflinePlayer(memberId).getName();
+
+                                        if (memberId.equals(targetsParty.getLeader())) {
+                                            continue; // Skip showing the leader twice
+                                        }
+
+                                        if (partyMember == null) {
+                                            player.sendMessage("§7- §f" + memberName + " §7(OFFLINE)");
+                                        } else {
+                                            player.sendMessage("§7- §f" + memberName);
+                                        }
+                                    }
+                                    break;
+
+                                }
                             default:
                                 showAdminHelp(player);
                                 break;
@@ -252,6 +299,9 @@ public class PartyCommands implements CommandExecutor {
             }
             if (player.hasPermission("PartyPlugin.admin.socialspy")) {
                 player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.socialspy"));
+            }
+            if(player.hasPermission("PartyPlugin.admin.socialspy")){
+                player.sendMessage(plugin.getLanguageManager().getMessage("party.help.admin.seeParty"));
             }
         } else {
             player.sendMessage(plugin.getLanguageManager().getMessage("no_permission"));

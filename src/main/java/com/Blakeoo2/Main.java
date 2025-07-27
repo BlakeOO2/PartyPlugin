@@ -39,7 +39,7 @@ public class Main extends JavaPlugin {
         //Base party command that allows for create, leave, accept, disband, invite, kick, list, promote, and chat
         getCommand("party").setExecutor(new PartyCommands(this));
         getCommand("partychat").setExecutor(new PartyChatCommand(this));
-        //TODO create subcommands for party create, party invite, party leave, party join, party kick, party list, party info, party delete
+
     }
 
     public void registerListeners(){

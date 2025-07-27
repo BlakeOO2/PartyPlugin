@@ -35,6 +35,7 @@ permissions:
       - PartyPlugin.admin.reload
       - PartyPlugin.admin.socialspy
       - PartyPlugin.admin
+      - PartyPlugin.admin.seeParty
 
   PartyPlugin.admin:
     default: op
@@ -48,3 +49,7 @@ permissions:
   PartyPlugin.admin.socialspy:
     default: op
     description: Allows the user to see all party chat messages, doesn't matter what party they are in themselves
+
+  PartyPlugin.admin.seeParty:
+    default: op
+    description: Allows the user to be able to see the members of another party

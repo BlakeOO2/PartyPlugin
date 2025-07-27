@@ -27,6 +27,7 @@ party:
       help: "&e/party admin help &b - Prints this help message."
       reload: "&e/party admin reload &b - Reload the config, and languages."
       socialspy: "&e/party admin socialspy &b - Turns on social spy for party chat messages."
+      seeParty: "&e/party admin seeparty <player> &b - See the members inside of a player's party.."
 
 
   invite:
@@ -80,6 +81,8 @@ party:
     kick: "&cUsage: /party kick <player>"
     invite: "&cUsage: /party invite <player>"
     accept: "&CUsage: /party accept <player>"
+    seeparty: "Usage: /party admin seeparty <player>"
+
 
   kick:
     no_party:  "&cYou are not in a party."
@@ -109,4 +112,8 @@ party:
     socialspy_on: "&c[PartyAdmin] Social Spy turned on"
     socialspy_off: "&c[PartyAdmin] Social Spy turned off"
     reload: "&aConfig and language files have been reloaded"
+    player_not_online: "&c{player} is not currently online."
+    not_in_party: "&c{player} is not in a party."
+
+
 
