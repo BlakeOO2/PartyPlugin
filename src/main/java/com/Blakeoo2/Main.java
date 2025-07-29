@@ -14,12 +14,19 @@ public class Main extends JavaPlugin {
    private PartyManager partyManager;
    private PartyAPI partyAPI;
 
+   // Static initializer to ensure plugin is never null
+   static {
+       // Default initialization to prevent NPE
+       plugin = null;
+   }
+
     public void onEnable() {
+        plugin = this;  // Set the static instance first
         saveDefaultConfig();
-        plugin = this;
         languageManager = new LanguageManager(this);
         partyManager = new PartyManager(this);
-        this.partyAPI = new PartyAPIImplementation(plugin);
+        // Initialize API after plugin instance is set
+        this.partyAPI = new PartyAPIImplementation();
 
         registerCommands();
         registerListeners();
@@ -69,16 +76,19 @@ public class Main extends JavaPlugin {
 
 
     public static Main getInstance() {
+        if (plugin == null) {
+            throw new IllegalStateException("Main plugin instance is not yet initialized. This method should be called after the plugin has been enabled.");
+        }
         return plugin;
     }
 
 
     public PartyAPI getPartyAPI() {
         if (partyAPI == null) {
-            partyAPI = new PartyAPIImplementation(plugin);
+            // Ensure we're using 'this' instead of the static reference for guaranteed initialization
+            partyAPI = new PartyAPIImplementation();
         }
         return partyAPI;
-
     }
 
 

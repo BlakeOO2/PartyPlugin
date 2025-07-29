@@ -12,13 +12,8 @@ import com.Blakeoo2.party.PartyManager;
 public class PartyAPIImplementation implements PartyAPI{
     private final Main plugin;
 
-    public PartyAPIImplementation(Main plugin){
-        this.plugin = plugin;
-
-        if (this.plugin == null) {
-            throw new IllegalArgumentException("Main plugin instance is null! Ensure Main.getInstance() is initialized.");
-        }
-
+    public PartyAPIImplementation(){
+        plugin = Main.getInstance();
     }
 
 
