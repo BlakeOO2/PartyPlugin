@@ -14,6 +14,9 @@ public class MembersImpl implements MembersAPI {
     public MembersImpl(Main plugin){
         this.plugin = plugin;
         this.partyManager  = plugin.getPartyManager();
+        if(plugin == null){
+            throw new IllegalArgumentException("Plugin cannot be null");
+        }
     }
 
 
